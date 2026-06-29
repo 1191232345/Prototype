@@ -1,0 +1,432 @@
+{
+  "moduleName": "费用重计",
+  "pageId": "page-294035ee",
+  "breadcrumb": "费用重计",
+  "pageType": "list-crud",
+  "version": "1.0.0",
+  "dataFile": "data/page-294035ee-data.json",
+  "filters": [
+    {
+      "id": "filter0",
+      "label": "客户代码",
+      "type": "select",
+      "field": "field1",
+      "match": "exact",
+      "options": [
+        {
+          "value": "demo",
+          "label": "DEMO"
+        }
+      ],
+      "defaultValue": "全部"
+    },
+    {
+      "id": "filter1",
+      "label": "仓库代码",
+      "type": "select",
+      "field": "field2",
+      "match": "exact",
+      "options": [
+        {
+          "value": "demo",
+          "label": "DEMO"
+        }
+      ],
+      "defaultValue": ""
+    },
+    {
+      "id": "filter2",
+      "label": "渠道",
+      "type": "select",
+      "field": "field3",
+      "match": "exact",
+      "options": [
+        {
+          "value": "",
+          "label": "全部"
+        }
+      ],
+      "defaultValue": ""
+    },
+    {
+      "id": "filter3",
+      "label": "跟踪号",
+      "type": "text",
+      "field": "field4",
+      "match": "contains",
+      "placeholder": "请输入"
+    }
+  ],
+  "columns": [
+    {
+      "field": "field1",
+      "label": "客户代码"
+    },
+    {
+      "field": "field2",
+      "label": "仓库代码"
+    },
+    {
+      "field": "field3",
+      "label": "渠道"
+    },
+    {
+      "field": "field4",
+      "label": "跟踪号"
+    },
+    {
+      "field": "field5",
+      "label": "预报尺寸"
+    },
+    {
+      "field": "field6",
+      "label": "预报重量"
+    },
+    {
+      "field": "field7",
+      "label": "实际尺寸"
+    },
+    {
+      "field": "field8",
+      "label": "实际重量"
+    },
+    {
+      "field": "field9",
+      "label": "预报金额"
+    },
+    {
+      "field": "field10",
+      "label": "实际金额"
+    },
+    {
+      "field": "field11",
+      "label": "差价"
+    },
+    {
+      "field": "field12",
+      "label": "创建人"
+    },
+    {
+      "field": "createdAt",
+      "label": "创建时间",
+      "type": "datetime",
+      "sortable": true
+    },
+    {
+      "field": "field14",
+      "label": "更新人"
+    },
+    {
+      "field": "updatedAt",
+      "label": "更新时间",
+      "type": "datetime",
+      "sortable": true
+    }
+  ],
+  "rowActions": [
+    "edit",
+    "delete"
+  ],
+  "toolbarButtons": [
+    {
+      "id": "toolbarBtn0",
+      "label": "导入",
+      "icon": "fa-upload",
+      "action": "import",
+      "variant": "secondary"
+    },
+    {
+      "id": "toolbarBtn1",
+      "label": "批量删除",
+      "icon": "fa-layer-group",
+      "action": "custom",
+      "variant": "danger"
+    }
+  ],
+  "statusLabels": {
+    "active": {
+      "label": "启用",
+      "class": "badge-success"
+    },
+    "inactive": {
+      "label": "禁用",
+      "class": "badge-secondary"
+    }
+  },
+  "mockData": [
+    {
+      "id": "row_001",
+      "field1": "示例客户代码",
+      "field2": "示例仓库代码",
+      "field3": "示例渠道",
+      "field4": "示例跟踪号",
+      "field5": "示例预报尺寸",
+      "field6": "示例预报重量",
+      "field7": "示例实际尺寸",
+      "field8": "示例实际重量",
+      "field9": "示例预报金额",
+      "field10": "示例实际金额",
+      "field11": "示例差价",
+      "field12": "示例创建人",
+      "createdAt": "2026-06-27T10:00:00.000Z",
+      "field14": "示例更新人",
+      "updatedAt": "2026-06-27T10:00:00.000Z"
+    }
+  ],
+  "logicDocs": {
+    "init": [
+      [
+        "列表数据",
+        "根据渠道返回真实尺寸，重新计算快递费并计算差价",
+        "mock 数据",
+        "默认排序"
+      ]
+    ],
+    "filters": [
+      [
+        "客户代码",
+        "下拉单选",
+        "DEMO"
+      ],
+      [
+        "仓库代码",
+        "下拉单选",
+        "DEMO"
+      ],
+      [
+        "渠道",
+        "下拉单选",
+        "按配置匹配"
+      ],
+      [
+        "跟踪号",
+        "文本输入",
+        "按配置匹配"
+      ]
+    ],
+    "buttons": [
+      [
+        "导入",
+        "工具栏",
+        "无",
+        "打开导入弹窗"
+      ],
+      [
+        "批量删除",
+        "工具栏",
+        "无",
+        "二次确认弹窗"
+      ],
+      [
+        "编辑",
+        "行操作",
+        "无",
+        "打开编辑弹窗并回填，保存后刷新"
+      ],
+      [
+        "删除",
+        "行操作",
+        "无",
+        "二次确认后从列表移除"
+      ]
+    ],
+    "fields": [
+      [
+        "客户代码",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "仓库代码",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "渠道",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "跟踪号",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "预报尺寸",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "预报重量",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "实际尺寸",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "实际重量",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "预报金额",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "实际金额",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "差价",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "创建人",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "创建时间",
+        "日期时间",
+        "是",
+        "—"
+      ],
+      [
+        "更新人",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "更新时间",
+        "日期时间",
+        "是",
+        "—"
+      ]
+    ]
+  },
+  "formFields": [
+    {
+      "id": "fieldField1",
+      "label": "客户代码",
+      "field": "field1",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入客户代码"
+    },
+    {
+      "id": "fieldField2",
+      "label": "仓库代码",
+      "field": "field2",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入仓库代码"
+    },
+    {
+      "id": "fieldField3",
+      "label": "渠道",
+      "field": "field3",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入渠道"
+    },
+    {
+      "id": "fieldField4",
+      "label": "跟踪号",
+      "field": "field4",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入跟踪号"
+    },
+    {
+      "id": "fieldField5",
+      "label": "预报尺寸",
+      "field": "field5",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入预报尺寸"
+    },
+    {
+      "id": "fieldField6",
+      "label": "预报重量",
+      "field": "field6",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入预报重量"
+    },
+    {
+      "id": "fieldField7",
+      "label": "实际尺寸",
+      "field": "field7",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入实际尺寸"
+    },
+    {
+      "id": "fieldField8",
+      "label": "实际重量",
+      "field": "field8",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入实际重量"
+    },
+    {
+      "id": "fieldField9",
+      "label": "预报金额",
+      "field": "field9",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入预报金额"
+    },
+    {
+      "id": "fieldField10",
+      "label": "实际金额",
+      "field": "field10",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入实际金额"
+    },
+    {
+      "id": "fieldField11",
+      "label": "差价",
+      "field": "field11",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入差价"
+    },
+    {
+      "id": "fieldField12",
+      "label": "创建人",
+      "field": "field12",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入创建人"
+    },
+    {
+      "id": "fieldField14",
+      "label": "更新人",
+      "field": "field14",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入更新人"
+    }
+  ]
+}
