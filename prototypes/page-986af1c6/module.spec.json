@@ -1,0 +1,380 @@
+{
+  "moduleName": "产品备案",
+  "pageId": "page-986af1c6",
+  "breadcrumb": "产品备案",
+  "pageType": "list-crud",
+  "version": "1.0.0",
+  "dataFile": "data/page-986af1c6-data.json",
+  "filters": [
+    {
+      "id": "filterSKU0",
+      "label": "SKU",
+      "type": "text",
+      "field": "sKU",
+      "match": "contains",
+      "placeholder": "请输入SKU"
+    },
+    {
+      "id": "filter1",
+      "label": "客户代码",
+      "type": "select",
+      "field": "field2",
+      "match": "exact",
+      "options": [
+        {
+          "value": "",
+          "label": "全部"
+        },
+        {
+          "value": "demo",
+          "label": "DEMO"
+        },
+        {
+          "value": "vip",
+          "label": "VIP"
+        }
+      ],
+      "defaultValue": ""
+    },
+    {
+      "id": "filter2",
+      "label": "产品名称",
+      "type": "text",
+      "field": "field3",
+      "match": "contains",
+      "placeholder": "中文名/英文名"
+    },
+    {
+      "id": "filter3",
+      "label": "自定义编码",
+      "type": "text",
+      "field": "field3",
+      "match": "contains",
+      "placeholder": "请输入编码"
+    }
+  ],
+  "columns": [
+    {
+      "field": "sKU",
+      "label": "SKU"
+    },
+    {
+      "field": "field2",
+      "label": "客户代码"
+    },
+    {
+      "field": "field3",
+      "label": "自定义编码"
+    },
+    {
+      "field": "field4",
+      "label": "产品类型"
+    },
+    {
+      "field": "field5",
+      "label": "中文名"
+    },
+    {
+      "field": "field6",
+      "label": "英文名"
+    },
+    {
+      "field": "field7",
+      "label": "申报价值"
+    },
+    {
+      "field": "cm",
+      "label": "尺寸(cm)"
+    },
+    {
+      "field": "g",
+      "label": "重量(g)"
+    },
+    {
+      "field": "field10",
+      "label": "不规则标记"
+    },
+    {
+      "field": "status",
+      "label": "状态",
+      "type": "status"
+    }
+  ],
+  "rowActions": [
+    "view"
+  ],
+  "toolbarButtons": [
+    {
+      "id": "toolbarBtn0",
+      "label": "新增",
+      "icon": "fa-plus",
+      "action": "create",
+      "variant": "primary"
+    },
+    {
+      "id": "toolbarBtn1",
+      "label": "批量导入",
+      "icon": "fa-upload",
+      "action": "import",
+      "variant": "secondary"
+    },
+    {
+      "id": "toolbarBtn2",
+      "label": "批量编辑尺寸",
+      "icon": "fa-layer-group",
+      "action": "custom",
+      "variant": "secondary"
+    }
+  ],
+  "statusLabels": {
+    "active": {
+      "label": "启用",
+      "class": "badge-success"
+    },
+    "inactive": {
+      "label": "禁用",
+      "class": "badge-secondary"
+    }
+  },
+  "mockData": [
+    {
+      "id": "row_001",
+      "sKU": "示例SKU",
+      "field2": "示例客户代码",
+      "field3": "示例自定义编码",
+      "field4": "示例产品类型",
+      "field5": "示例中文名",
+      "field6": "示例英文名",
+      "field7": "示例申报价值",
+      "cm": "示例尺寸(cm)",
+      "g": "示例重量(g)",
+      "field10": "示例不规则标记",
+      "status": "active"
+    }
+  ],
+  "logicDocs": {
+    "init": [
+      [
+        "列表数据",
+        "从 产品备案 原型自动提取",
+        "mock 数据",
+        "默认排序"
+      ]
+    ],
+    "filters": [
+      [
+        "SKU",
+        "文本输入",
+        "请输入SKU"
+      ],
+      [
+        "客户代码",
+        "下拉单选",
+        "全部/DEMO/VIP"
+      ],
+      [
+        "产品名称",
+        "文本输入",
+        "中文名/英文名"
+      ],
+      [
+        "自定义编码",
+        "文本输入",
+        "请输入编码"
+      ]
+    ],
+    "buttons": [
+      [
+        "新增",
+        "工具栏",
+        "无",
+        "打开新增表单弹窗，提交后刷新列表"
+      ],
+      [
+        "批量导入",
+        "工具栏",
+        "需先勾选列表行",
+        "对选中行执行「批量导入」"
+      ],
+      [
+        "批量编辑尺寸",
+        "工具栏",
+        "需先勾选列表行",
+        "对选中行执行「批量编辑尺寸」"
+      ],
+      [
+        "查看",
+        "行操作",
+        "无",
+        "打开详情弹窗查看记录"
+      ]
+    ],
+    "fields": [
+      [
+        "SKU",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "客户代码",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "自定义编码",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "产品类型",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "中文名",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "英文名",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "申报价值",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "尺寸(cm)",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "重量(g)",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "不规则标记",
+        "文本",
+        "否",
+        "—"
+      ],
+      [
+        "状态",
+        "状态标签",
+        "否",
+        "已发布/未发布"
+      ]
+    ]
+  },
+  "formFields": [
+    {
+      "id": "fieldSku",
+      "label": "SKU",
+      "field": "sKU",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入SKU"
+    },
+    {
+      "id": "fieldField2",
+      "label": "客户代码",
+      "field": "field2",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入客户代码"
+    },
+    {
+      "id": "fieldField3",
+      "label": "自定义编码",
+      "field": "field3",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入自定义编码"
+    },
+    {
+      "id": "fieldField4",
+      "label": "产品类型",
+      "field": "field4",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入产品类型"
+    },
+    {
+      "id": "fieldField5",
+      "label": "中文名",
+      "field": "field5",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入中文名"
+    },
+    {
+      "id": "fieldField6",
+      "label": "英文名",
+      "field": "field6",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入英文名"
+    },
+    {
+      "id": "fieldField7",
+      "label": "申报价值",
+      "field": "field7",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入申报价值"
+    },
+    {
+      "id": "fieldCm",
+      "label": "尺寸(cm)",
+      "field": "cm",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入尺寸(cm)"
+    },
+    {
+      "id": "fieldG",
+      "label": "重量(g)",
+      "field": "g",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入重量(g)"
+    },
+    {
+      "id": "fieldField10",
+      "label": "不规则标记",
+      "field": "field10",
+      "required": true,
+      "type": "text",
+      "placeholder": "请输入不规则标记"
+    },
+    {
+      "id": "fieldStatus",
+      "label": "状态",
+      "field": "status",
+      "required": true,
+      "type": "select",
+      "options": [
+        {
+          "value": "active",
+          "label": "启用"
+        },
+        {
+          "value": "inactive",
+          "label": "禁用"
+        }
+      ]
+    }
+  ]
+}
