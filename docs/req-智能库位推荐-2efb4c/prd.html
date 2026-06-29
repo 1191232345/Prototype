@@ -9,6 +9,7 @@
   padding: 24px 16px 48px;
   background: #f3f4f6;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  scroll-behavior: smooth;
 }
 
 .doc-preview {
@@ -17,7 +18,7 @@
   border-radius: 10px;
   padding: 32px 40px;
   width: 100%;
-  max-width: 960px;
+  max-width: 1120px;
   margin: 0 auto;
   box-shadow: 0 1px 3px rgb(0 0 0 / 6%);
   color: #1f2937;
@@ -68,9 +69,99 @@
   color: #9ca3af;
 }
 
+.doc-preview__body {
+  width: 100%;
+  min-width: 0;
+}
+
+.doc-preview__body--with-toc {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 28px 36px;
+  align-items: start;
+}
+
+.doc-preview__toc {
+  position: sticky;
+  top: 20px;
+  align-self: start;
+  padding: 14px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #f9fafb;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.doc-preview__toc-title {
+  margin: 0 0 10px;
+  padding: 0 4px 8px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.doc-preview__toc-scroll {
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.doc-preview__toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.doc-preview__toc > .doc-preview__toc-scroll > ul {
+  padding: 0;
+}
+
+.doc-preview__toc li {
+  margin: 0;
+  padding: 0;
+}
+
+.doc-preview__toc li ul {
+  margin: 2px 0 4px;
+  padding-left: 12px;
+  border-left: 1px solid #e5e7eb;
+}
+
+.doc-preview__toc a {
+  display: block;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #4b5563;
+  text-decoration: none;
+  word-break: break-word;
+  transition: background 0.15s, color 0.15s;
+}
+
+.doc-preview__toc a:hover {
+  background: #eff6ff;
+  color: #1d4ed8;
+  text-decoration: none;
+}
+
+.doc-preview--manual .doc-preview__toc a:hover {
+  background: #f0fdfa;
+  color: #0f766e;
+}
+
 .doc-preview__content {
   width: 100%;
   min-width: 0;
+}
+
+.doc-preview__content h1,
+.doc-preview__content h2,
+.doc-preview__content h3,
+.doc-preview__content h4 {
+  scroll-margin-top: 24px;
 }
 
 .doc-preview__content h1 {
@@ -220,21 +311,79 @@
   background: #f9fafb;
   font-weight: 600;
 }
+
+@media (max-width: 900px) {
+  .doc-preview {
+    padding: 24px 20px;
+  }
+
+  .doc-preview__body--with-toc {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .doc-preview__toc {
+    position: static;
+    max-height: none;
+  }
+
+  .doc-preview__toc-scroll {
+    max-height: 240px;
+  }
+}
 </style>
 </head>
 <body>
   <article class="doc-preview doc-preview--prd">
     <header class="doc-preview__header">
       <span class="doc-preview__badge doc-preview__badge--prd">PRD 文档</span>
-      <span class="doc-preview__meta">195 行</span>
+      <span class="doc-preview__meta">228 行</span>
     </header>
-    <div class="doc-preview__content">
-<h1>智能上架库位推荐系统 - PRD (V1.1)</h1>
+    <div class="doc-preview__body doc-preview__body--with-toc">
+      <nav class="doc-preview__toc" aria-label="文档目录">
+      <p class="doc-preview__toc-title">目录</p>
+      <div class="doc-preview__toc-scroll">
+        <ul>
+<li><a href="#智能上架库位推荐系统-prd-v10">智能上架库位推荐系统 - PRD (V1.0)</a><ul>
+<li><a href="#一-背景及现状">一. 背景及现状</a><ul>
+<li><a href="#11-背景">1.1 背景</a></li>
+<li><a href="#12-痛点">1.2 痛点</a></li>
+<li><a href="#13-目标">1.3 目标</a></li>
+<li><a href="#14-成功指标">1.4 成功指标</a></li>
+</ul>
+</li>
+<li><a href="#二-功能需求">二、 功能需求</a><ul>
+<li><a href="#21-入库实时推荐一期-mvp">2.1 入库实时推荐（一期 MVP）</a></li>
+<li><a href="#22-周期性调仓清单二期">2.2 周期性调仓清单（二期）</a></li>
+<li><a href="#23-增强资源允许">2.3 增强（资源允许）</a></li>
+</ul>
+</li>
+<li><a href="#三-技术方案">三. 技术方案</a><ul>
+<li><a href="#31-整体架构">3.1 整体架构</a></li>
+<li><a href="#32-规则引擎硬约束先过滤">3.2 规则引擎（硬约束，先过滤）</a></li>
+<li><a href="#33-lightgbm-排序模型软优化16-维特征">3.3 LightGBM 排序模型（软优化，16 维特征）</a></li>
+<li><a href="#34-非功能要求">3.4 非功能要求</a></li>
+</ul>
+</li>
+<li><a href="#四-用户与主流程">四、 用户与主流程</a></li>
+<li><a href="#五-多业务场景">五、 多业务场景</a></li>
+<li><a href="#六-mvp-边界">六、 MVP 边界</a></li>
+<li><a href="#七-数据需求">七、 数据需求</a></li>
+<li><a href="#八-待确认事项">八、 待确认事项</a></li>
+<li><a href="#九-风险与应对">九、 风险与应对</a></li>
+<li><a href="#十-名词定义">十、 名词定义</a></li>
+</ul>
+</li>
+</ul>
+      </div>
+    </nav>
+      <div class="doc-preview__content">
+<h1 id="智能上架库位推荐系统-prd-v10">智能上架库位推荐系统 - PRD (V1.0)</h1>
 <div class="doc-preview__table-wrap"><table>
 <thead>
 <tr>
 <th>版本</th>
-<th>V1.1</th>
+<th>V1.0</th>
 <th>状态</th>
 <th>待确认</th>
 </tr>
@@ -243,573 +392,646 @@
 <tr>
 <td>产品负责人</td>
 <td>zsw</td>
-<td>里程碑</td>
-<td>周一需求确认收尾</td>
+<td>协作方</td>
+<td>IT部、仓库运营组</td>
 </tr>
 <tr>
-<td>协作方</td>
-<td>IT部、仓库运营组、Super Li、当然爽</td>
 <td>更新</td>
 <td>2026-06-29</td>
+<td>里程碑</td>
+<td>需求确认收尾</td>
 </tr>
 </tbody>
 </table></div>
 <hr>
-<h2>1. 要解决什么问题</h2>
-<p>在大仓、高货架场景下（部分仓库超 50 万平方英尺，货架如 A08/NGj06 达 34 尺/6 层），库位分配依赖人工经验，导致上架/拣货无效行走多、高频品高位作业、巷道负载失衡。系统需在<strong>入库上架时</strong>，综合动销、关联、物理属性与库区约束，给出<strong>可解释</strong>的最优库位，使整条出库动线受益，而非仅优化上架环节。</p>
-<h3>1.1 核心痛点</h3>
+<h2 id="一-背景及现状">一. 背景及现状</h2>
+<h3 id="11-背景">1.1 背景</h3>
+<p>大仓、高货架场景（部分仓库超 50 万平方英尺，货架达 34 尺/6 层）下，库位分配依赖人工经验，导致拣货走动远、攀爬多、巷道拥堵、大促爆仓。</p>
+<h3 id="12-痛点">1.2 痛点</h3>
 <div class="doc-preview__table-wrap"><table>
 <thead>
 <tr>
 <th>痛点</th>
 <th>表现</th>
-<th>提出场景</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>动线过长</td>
-<td>上架/拣货频繁对角穿越</td>
-<td>仓库经理</td>
+<td>动线/高度错配</td>
+<td>高频 SKU 在远端高层，拣货对角穿越/6层 vs 2层，效率差悬殊</td>
 </tr>
 <tr>
-<td>高度错配</td>
-<td>高频 SKU 在高层/远端，6 层 vs 1 层效率差异大</td>
-<td>现场运营</td>
+<td>串单风险</td>
+<td>不同客户 SKU 混放，拣货易拿错、复核成本高</td>
+</tr>
+<tr>
+<td>大促拥堵</td>
+<td>爆单前库位未前置，拣货面与巷道瞬时过载</td>
 </tr>
 <tr>
 <td>负载失衡</td>
 <td>部分巷道过载 2 倍，部分闲置</td>
-<td>仓库经理</td>
 </tr>
 <tr>
-<td>一单分散</td>
-<td>一单多件 ABCD 货物跨区存放，拣货往返多</td>
-<td>现场运营</td>
-</tr>
-<tr>
-<td>业务缺口</td>
-<td>VC/SOP/快转无差异化策略</td>
-<td>Tommy 总</td>
+<td>业务策略缺口</td>
+<td>VC（平台自营采购）/SOP/快转无差异化上架策略</td>
 </tr>
 </tbody>
 </table></div>
-<h3>1.2 产品目标（拆分度量）</h3>
+<h3 id="13-目标">1.3 目标</h3>
 <div class="doc-preview__table-wrap"><table>
 <thead>
 <tr>
-<th>目标维度</th>
-<th>现状 → 目标</th>
-<th>主要受益角色</th>
+<th>目标</th>
+<th>策略要点</th>
+<th>受益角色</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>上架动线</strong></td>
-<td>随机分配 → 距入库点/月台路径最短</td>
-<td>上架人员</td>
-</tr>
-<tr>
-<td><strong>拣货高度</strong></td>
-<td>高频占高层 → ≥80% A 类在 1–3 层（以 WMS 层定义为准）</td>
+<td><strong>缩短拣货动线</strong></td>
+<td>高频 SKU 靠近拣货出口</td>
 <td>拣货人员</td>
 </tr>
 <tr>
-<td><strong>同单聚合</strong></td>
-<td>跨区分散 → 高关联 SKU 同巷道/相邻库位</td>
+<td><strong>降低攀爬</strong></td>
+<td>高频 SKU 放在黄金层 <strong>2–3 层</strong>（WMS 层定义）</td>
 <td>拣货人员</td>
+</tr>
+<tr>
+<td><strong>降低串单</strong></td>
+<td><strong>同客户 SKU 集中存放</strong>；<strong>竞品客户隔离</strong></td>
+<td>拣货/复核</td>
+</tr>
+<tr>
+<td><strong>缓解大促拥堵</strong></td>
+<td>大促前<strong>前置铺货</strong>至优位库位</td>
+<td>仓库经理</td>
 </tr>
 <tr>
 <td><strong>巷道均衡</strong></td>
-<td>局部过载 → 各区作业量标准差 ≤20%</td>
+<td>上架/拣货任务在巷道间均衡分配</td>
 <td>仓库经理</td>
 </tr>
 <tr>
-<td><strong>空间利用</strong></td>
-<td>约 65% → 75%</td>
-<td>仓库经理</td>
+<td><strong>上架效率</strong></td>
+<td>入库点→推荐库位路径最短</td>
+<td>上架人员</td>
 </tr>
 </tbody>
 </table></div>
-<h3>1.3 MVP 边界</h3>
+<h3 id="14-成功指标">1.4 成功指标</h3>
+<div class="doc-preview__table-wrap"><table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>目标</th>
+<th>数据源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拣货行走距离缩短率</td>
+<td>≥25%</td>
+<td>WMS 任务记录</td>
+</tr>
+<tr>
+<td>拣货工时下降率</td>
+<td>≥20%</td>
+<td>WMS 工时</td>
+</tr>
+<tr>
+<td>A 类 SKU 黄金层(2–3层)占比</td>
+<td>≥80%</td>
+<td>库位+动销快照</td>
+</tr>
+<tr>
+<td>同客户 SKU 同巷道率</td>
+<td>≥85%</td>
+<td>库位-客户映射</td>
+</tr>
+<tr>
+<td>推荐采纳率(Top1)</td>
+<td>≥85%</td>
+<td>PDA 日志</td>
+</tr>
+<tr>
+<td>上架失败率</td>
+<td>≤5%</td>
+<td>WMS 异常</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="二-功能需求">二、 功能需求</h2>
+<h3 id="21-入库实时推荐一期-mvp">2.1 入库实时推荐（一期 MVP）</h3>
+<div class="doc-preview__table-wrap"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>说明</th>
+<th>验收标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Top3 库位推荐</strong></td>
+<td>扫入库单 → 规则过滤 → 模型排序 → Top3+理由标签</td>
+<td>响应≤3s；理由≥2</td>
+</tr>
+<tr>
+<td><strong>硬约束兜底</strong></td>
+<td>库容、承重、品类/化学品隔离、竞品客户禁邻等，不满足直接剔除</td>
+<td>校验通过率≥95%</td>
+</tr>
+<tr>
+<td><strong>同客户聚集</strong></td>
+<td>优先推荐该客户已有库存所在巷道/相邻库位</td>
+<td>同客户同巷道率≥85%</td>
+</tr>
+<tr>
+<td><strong>竞品客户隔离</strong></td>
+<td>不同竞品客户 SKU 不得推荐至相邻库位（可配置客户分组）</td>
+<td>零违规（硬约束）</td>
+</tr>
+<tr>
+<td><strong>冷启动</strong></td>
+<td>新 SKU 按品类均值+体积规则，标「观察期」</td>
+<td>30 天后转正式</td>
+</tr>
+<tr>
+<td><strong>异常兜底</strong></td>
+<td>无合适库位 → 手动选择+必填原因</td>
+<td>流程不中断</td>
+</tr>
+<tr>
+<td><strong>策略插槽</strong></td>
+<td>VC（平台自营）/SOP/快转路由占位，一期默认 B2C</td>
+<td>接口可扩展</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="22-周期性调仓清单二期">2.2 周期性调仓清单（二期）</h3>
+<div class="doc-preview__table-wrap"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>说明</th>
+<th>验收标准</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>周度调仓</strong></td>
+<td>每周扫描动销变化，输出移库任务清单</td>
+<td>按 ROI 排序</td>
+</tr>
+<tr>
+<td><strong>大促前调仓</strong></td>
+<td>接入促销日历/销量预测，提前将爆款前置至出口+黄金层</td>
+<td>大促前 T-7 天输出</td>
+</tr>
+<tr>
+<td><strong>人工审批</strong></td>
+<td>任务上限+审批后下发 WMS 移库单</td>
+<td>每日≤N 条可配置</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="23-增强资源允许">2.3 增强（资源允许）</h3>
+<p>3D 打托示意（入库单→堆码 3D 图）；库位健康度热力图（二期）。</p>
+<hr>
+<h2 id="三-技术方案">三. 技术方案</h2>
+<h3 id="31-整体架构">3.1 整体架构</h3>
+<pre><code>入库单/SKU → [规则引擎：硬约束过滤] → 候选库位池
+           → [LightGBM 排序模型：16 维特征打分] → Top3 + 理由标签
+           → PDA 执行 → 日志回流（采纳/改选/原因）
+</code></pre>
+<p><strong>两阶段设计</strong>：规则引擎保证<strong>可行性与合规</strong>；LightGBM 在可行集内做<strong>最优排序</strong>，兼顾多目标权衡。</p>
+<h3 id="32-规则引擎硬约束先过滤">3.2 规则引擎（硬约束，先过滤）</h3>
+<div class="doc-preview__table-wrap"><table>
+<thead>
+<tr>
+<th>规则类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>库容/承重</td>
+<td>剩余容积、层承重上限</td>
+</tr>
+<tr>
+<td>品类/安全</td>
+<td>化学品/食品/温控隔离</td>
+</tr>
+<tr>
+<td>竞品客户隔离</td>
+<td>竞品客户 SKU 不得相邻库位</td>
+</tr>
+<tr>
+<td>库位状态</td>
+<td>禁用、冻结、预留库位剔除</td>
+</tr>
+<tr>
+<td>业务路由</td>
+<td>VC/SOP/快转库位池限定（策略插槽）</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="33-lightgbm-排序模型软优化16-维特征">3.3 LightGBM 排序模型（软优化，16 维特征）</h3>
+<div class="doc-preview__table-wrap"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>特征</th>
+<th>业务含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>距拣货出口距离</td>
+<td>高频 SKU 近出口</td>
+</tr>
+<tr>
+<td>2</td>
+<td>距入库点距离</td>
+<td>缩短上架动线</td>
+</tr>
+<tr>
+<td>3</td>
+<td>库位层数</td>
+<td>黄金层(2–3层)加分</td>
+</tr>
+<tr>
+<td>4</td>
+<td>SKU 出库频率(ABC)</td>
+<td>动销权重</td>
+</tr>
+<tr>
+<td>5</td>
+<td>同客户聚集度</td>
+<td>与客户已有库存的距离/同巷道</td>
+</tr>
+<tr>
+<td>6</td>
+<td>竞品隔离合规</td>
+<td>邻位竞品客户惩罚（过滤后恒为 0）</td>
+</tr>
+<tr>
+<td>7</td>
+<td>同单共现关联</td>
+<td>历史订单 ABCD 共现聚合</td>
+</tr>
+<tr>
+<td>8</td>
+<td>品类关联度</td>
+<td>购物篮互补品类邻近</td>
+</tr>
+<tr>
+<td>9</td>
+<td>巷道负载率</td>
+<td>均衡各巷道作业量</td>
+</tr>
+<tr>
+<td>10</td>
+<td>库位剩余容积比</td>
+<td>空间匹配</td>
+</tr>
+<tr>
+<td>11</td>
+<td>承重利用率</td>
+<td>重货下层匹配</td>
+</tr>
+<tr>
+<td>12</td>
+<td>体积/形状适配</td>
+<td>大件/异形专区</td>
+</tr>
+<tr>
+<td>13</td>
+<td>大促预测增益</td>
+<td>促销前爆款前置加权</td>
+</tr>
+<tr>
+<td>14</td>
+<td>历史拣货耗时</td>
+<td>该库位历史作业效率</td>
+</tr>
+<tr>
+<td>15</td>
+<td>路径成本</td>
+<td>减少对角穿越</td>
+</tr>
+<tr>
+<td>16</td>
+<td>季节性趋势</td>
+<td>季节性 SKU 动销预测</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>输出</strong>：每个候选库位一个排序分 → 取 Top3；同步生成可解释理由标签（如「高频A类」「同客户聚集」「黄金层」）。</p>
+<p><strong>训练与迭代</strong>：近 3 月上架/拣货任务日志作标注样本；灰度 A/B 对比人工分配效果；特征与模型版本可回滚。</p>
+<h3 id="34-非功能要求">3.4 非功能要求</h3>
+<div class="doc-preview__table-wrap"><table>
+<thead>
+<tr>
+<th>项</th>
+<th>要求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>推荐延迟</td>
+<td>≤3s（P99 ≤5s）</td>
+</tr>
+<tr>
+<td>可解释性</td>
+<td>每条推荐≥2 理由标签</td>
+</tr>
+<tr>
+<td>参数配置</td>
+<td>规则阈值、特征权重可视化调整，变更留痕</td>
+</tr>
+<tr>
+<td>降级</td>
+<td>模型不可用时回退规则+启发式打分</td>
+</tr>
+</tbody>
+</table></div>
+<hr>
+<h2 id="四-用户与主流程">四、 用户与主流程</h2>
+<div class="doc-preview__table-wrap"><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>诉求</th>
+<th>关键操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>上架员</td>
+<td>快速定位库位</td>
+<td>扫入库单 → Top3 → 执行</td>
+</tr>
+<tr>
+<td>拣货员</td>
+<td>少走路、少爬高、少串单</td>
+<td>被动受益</td>
+</tr>
+<tr>
+<td>仓库经理</td>
+<td>大促备货、调仓决策</td>
+<td>审核调仓清单（二期）</td>
+</tr>
+<tr>
+<td>IT</td>
+<td>规则/模型维护</td>
+<td>配置、日志、监控</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>入库流程</strong>: 扫单 → 识别业务类型 → 规则过滤 → LightGBM 排序 → Top3+理由 → PDA 执行 → 日志回流</p>
+<hr>
+<h2 id="五-多业务场景">五、 多业务场景</h2>
+<div class="doc-preview__table-wrap"><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>业务定义</th>
+<th>推荐策略差异</th>
+<th>待确认</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B2C</strong></td>
+<td>商家自发、平台撮合的常规零售出库</td>
+<td>标准规则 + LightGBM 模型</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>VC</strong></td>
+<td><strong>平台自营采购</strong>：平台向供应商采购，作为平台自有库存销售（类似亚马逊 VC、<strong>天猫超市</strong>、<strong>京东自营</strong>）；入库后按平台渠道履约，非商家寄售</td>
+<td>识别 VC 入库单 → 优先整托/整箱区；高周转 VC SKU 同样靠近出口+黄金层；可与 B2C 混存但走独立策略权重；关注平台收货预约/贴标要求</td>
+<td>是否设独立 VC 库区；VC SKU 周转口径；与 B2C 混放规则</td>
+</tr>
+<tr>
+<td><strong>SOP</strong></td>
+<td>特殊操作流程（质检/贴标/组装等）</td>
+<td>加工区/暂存区，非直接入存储区</td>
+<td>作业节点、缓冲库位</td>
+</tr>
+<tr>
+<td><strong>快转</strong></td>
+<td>入库后极短停留即出库</td>
+<td>越库至发货暂存区</td>
+<td>判定阈值、能否占拣货面</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<p><strong>VC 与 B2C 区分要点</strong>：货权归平台（自营），供应商送货入库；推荐时需读取入库单<strong>业务类型/渠道标识</strong>（如 <code>orderType=VC</code>），一期默认 B2C 策略，二期接入 VC 专项规则（策略插槽已预留）。</p>
+</blockquote>
+<h2 id="六-mvp-边界">六、 MVP 边界</h2>
 <div class="doc-preview__table-wrap"><table>
 <thead>
 <tr>
 <th>范围</th>
-<th>一期（MVP）</th>
+<th>一期</th>
 <th>二期</th>
 <th>三期</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>入库推荐</td>
-<td>B2C 标准上架推荐</td>
-<td>VC/SOP 专项策略</td>
+<td>入库 Top3 推荐</td>
+<td>✅ 规则引擎+LightGBM</td>
+<td>模型持续迭代</td>
 <td>多仓自适应</td>
 </tr>
 <tr>
-<td>算法能力</td>
-<td>动销+同单聚合+品类关联+约束校验</td>
-<td>再槽位建议+审批流</td>
-<td>快转越库全自动</td>
+<td>同客户聚集/竞品隔离</td>
+<td>✅</td>
+<td>—</td>
+<td>—</td>
 </tr>
 <tr>
-<td>策略预留</td>
-<td><strong>必须</strong>预留 VC/SOP/快转策略插槽（默认兜底）</td>
+<td>周度+大促调仓清单</td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>VC/SOP/快转策略</td>
+<td>插槽占位</td>
 <td>规则上线</td>
+<td>快转全自动</td>
+</tr>
+<tr>
+<td>热力图/3D 打托</td>
+<td>增强项</td>
+<td>热力图</td>
 <td>—</td>
 </tr>
-<tr>
-<td>可视化</td>
-<td>Top3 推荐+理由标签；3D 打托（增强）</td>
-<td>库位健康度热力图</td>
-<td>—</td>
-</tr>
 </tbody>
 </table></div>
-<blockquote>
-<p>一期默认仅接入 B2C 入库单；VC/SOP/快转通过策略接口占位，避免模型架构返工（响应 Tommy 总反馈）。</p>
-</blockquote>
 <hr>
-<h2>2. 用户与主流程</h2>
-<div class="doc-preview__table-wrap"><table>
-<thead>
-<tr>
-<th>角色</th>
-<th>痛点/诉求</th>
-<th>关键操作</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>上架人员</strong></td>
-<td>找库位靠经验；不知空位在哪</td>
-<td>扫入库单 → Top3 推荐+理由 → 执行/选手动</td>
-</tr>
-<tr>
-<td><strong>拣货人员</strong></td>
-<td>路径长、爬高多</td>
-<td>被动受益：高频品被预置至优位</td>
-</tr>
-<tr>
-<td><strong>仓库经理</strong></td>
-<td>缺数据、移库难量化</td>
-<td>看负载报表 → 审核再槽位建议（二期）</td>
-</tr>
-<tr>
-<td><strong>IT/算法</strong></td>
-<td>规则变更多、难调试</td>
-<td>权重配置、日志、数据质量监控</td>
-</tr>
-</tbody>
-</table></div>
-<p><strong>主流程</strong>: 扫入库单 → 识别业务类型(B2C/VC/SOP/快转) → 硬约束过滤 → 综合评分 → Top3+≥2 理由标签 → PDA 执行 → 日志回流（采纳/改选手动+原因）</p>
-<hr>
-<h2>3. 推荐逻辑</h2>
-<h3>3.1 评分因子</h3>
-<div class="doc-preview__table-wrap"><table>
-<thead>
-<tr>
-<th>因素</th>
-<th>类型</th>
-<th>权重</th>
-<th>业务含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>动销频率(ABC)</td>
-<td>软优化</td>
-<td>高</td>
-<td>A 类→近出口+低层；C 类→高层/远端</td>
-</tr>
-<tr>
-<td>同单共现聚合</td>
-<td>软优化</td>
-<td>高</td>
-<td>同一出库单高频共现 SKU 同巷道/相邻位</td>
-</tr>
-<tr>
-<td>品类关联度</td>
-<td>软优化</td>
-<td>中</td>
-<td>购物篮互补品类物理邻近（如牙膏+牙刷）</td>
-</tr>
-<tr>
-<td>路径成本</td>
-<td>软优化</td>
-<td>中</td>
-<td>入库点→库位距离，减少对角穿越</td>
-</tr>
-<tr>
-<td>库位高度</td>
-<td>软优化</td>
-<td>中</td>
-<td>高频优先 1–3 层，降低高位作业</td>
-</tr>
-<tr>
-<td>体积/形状</td>
-<td>软优化</td>
-<td>中</td>
-<td>大重件下层/承重架；异形件专区</td>
-</tr>
-<tr>
-<td>巷道负载均衡</td>
-<td>软优化</td>
-<td>中</td>
-<td>超阈值向邻近巷道溢出</td>
-</tr>
-<tr>
-<td>容量/承重/安全隔离</td>
-<td><strong>硬约束</strong></td>
-<td>必须</td>
-<td>容积、承重、化学品/食品隔离，不满足则跳过</td>
-</tr>
-</tbody>
-</table></div>
-<p><strong>同单 vs 品类</strong>: 优先级为 <strong>同出库单共现 &gt; 同巷道 &gt; 同库区</strong>；品类关联作次级拉近。</p>
-<h3>3.2 多业务场景策略（待业务确认）</h3>
-<div class="doc-preview__table-wrap"><table>
-<thead>
-<tr>
-<th>类型</th>
-<th>特征</th>
-<th>推荐差异</th>
-<th>待确认</th>
-<th>来源</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>B2C</strong></td>
-<td>拆零拣选</td>
-<td>标准 ABC+关联模型</td>
-<td>—</td>
-<td>默认</td>
-</tr>
-<tr>
-<td><strong>VC</strong></td>
-<td>整托/预约制/特定包装</td>
-<td>整托区优先；月台时间窗影响紧迫度</td>
-<td>周转口径、是否独立库区</td>
-<td>Tommy 总</td>
-</tr>
-<tr>
-<td><strong>SOP</strong></td>
-<td>质检/贴标/组装前置</td>
-<td>加工区附近或暂存区，非直接存储区</td>
-<td>作业节点、缓冲库位</td>
-<td>Tommy 总</td>
-</tr>
-<tr>
-<td><strong>快转</strong></td>
-<td>入库即出库</td>
-<td>越库至发货暂存区；若上架则最易存取位</td>
-<td>判定阈值(&lt;24h?)、能否占拣货面</td>
-<td>仓库经理</td>
-</tr>
-</tbody>
-</table></div>
-<blockquote>
-<p>术语待 Super Li 书面确认：VC 可能指 Vendor Central 或供应商直送；SOP 指 Special Operating Procedure（退货翻新、组合包装等）。</p>
-</blockquote>
-<h3>3.3 二期：再槽位建议</h3>
-<p>动销等级变更（如 A→C）或定期扫描时，输出「SKU-X: 当前位 → 推荐位，预计效率提升 Y%」，按 ROI/移库成本排序，每日任务上限+人工审批（避免建议无法落地）。</p>
-<hr>
-<h2>4. 功能清单</h2>
-<h3>4.1 一期必须</h3>
-<div class="doc-preview__table-wrap"><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>逻辑摘要</th>
-<th>验收标准</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>上架智能推荐</td>
-<td>硬约束过滤→综合评分→Top3+理由</td>
-<td>响应≤3s；理由≥2；容量校验通过率≥95%</td>
-</tr>
-<tr>
-<td>一单多件聚合</td>
-<td>近 3 月订单挖掘共现组合→相邻推荐</td>
-<td>同单强关联 SKU 同巷道率≥90%</td>
-</tr>
-<tr>
-<td>冷启动兜底</td>
-<td>新 SKU 按品类均值+体积规则，标「观察期」</td>
-<td>30 天后转正式策略</td>
-</tr>
-<tr>
-<td>异常兜底</td>
-<td>无合适库位→手动选择+必填原因</td>
-<td>流程不中断</td>
-</tr>
-<tr>
-<td>参数配置</td>
-<td>权重可视化调整，实时生效，保留历史</td>
-<td>配置即时生效</td>
-</tr>
-<tr>
-<td>策略插槽</td>
-<td>VC/SOP/快转路由占位+默认 B2C 策略</td>
-<td>接口可扩展，不改核心架构</td>
-</tr>
-</tbody>
-</table></div>
-<h3>4.2 一期增强（资源允许）</h3>
-<div class="doc-preview__table-wrap"><table>
-<thead>
-<tr>
-<th>功能</th>
-<th>逻辑摘要</th>
-<th>验收标准</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>3D 打托示意</td>
-<td>入库单明细→堆码方案→3D 图+稳定性</td>
-<td>生成≤2s；托盘利用率≥85%</td>
-</tr>
-</tbody>
-</table></div>
-<h3>4.3 延后</h3>
-<p>库位健康度热力图（二期）、再槽位自动生成（二期）、VC/SOP 规则上线（二期）、快转越库全自动（三期）、多仓自适应（三期）。</p>
-<hr>
-<h2>5. 数据需求</h2>
+<h2 id="七-数据需求">七、 数据需求</h2>
 <div class="doc-preview__table-wrap"><table>
 <thead>
 <tr>
 <th>数据</th>
 <th>来源</th>
 <th>用途</th>
-<th>质量要求</th>
-<th>责任/阻塞</th>
+<th>阻塞</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>单据业务类型(VC/B2C/SOP/快转)</td>
+<td>WMS</td>
+<td>业务路由、策略分流</td>
+<td>@IT部</td>
+</tr>
+<tr>
 <td>SKU 主数据(长宽高重)</td>
 <td>WMS</td>
-<td>推荐、打托</td>
-<td>完整率≥95%</td>
+<td>约束、特征</td>
 <td>@IT部</td>
 </tr>
 <tr>
 <td>库位主数据(巷道/层/承重)</td>
 <td>WMS</td>
-<td>约束校验</td>
-<td>准确率≥98%</td>
-<td><strong>@IT部 阻塞项</strong></td>
+<td>约束、特征</td>
+<td><strong>阻塞项</strong></td>
 </tr>
 <tr>
 <td>实时库存</td>
 <td>WMS</td>
-<td>占用校验</td>
-<td>延迟≤1min</td>
+<td>占用、同客户聚集</td>
 <td>@IT部</td>
 </tr>
 <tr>
-<td>订单明细(近 3 月)</td>
+<td>客户-SKU 归属</td>
+<td>订单/主数据</td>
+<td>聚集、竞品隔离</td>
+<td>@业务方</td>
+</tr>
+<tr>
+<td>竞品客户分组</td>
+<td>业务配置</td>
+<td>隔离规则</td>
+<td>@业务方</td>
+</tr>
+<tr>
+<td>订单明细(近3月)</td>
 <td>订单系统</td>
-<td>关联挖掘、回测</td>
-<td>可完整导出</td>
+<td>关联特征、训练、<strong>VC/B2C 区分</strong></td>
 <td>仓库经理+IT</td>
+</tr>
+<tr>
+<td>促销日历/销量预测</td>
+<td>运营系统</td>
+<td>大促前置(二期)</td>
+<td>@业务方</td>
 </tr>
 <tr>
 <td>任务记录(含行走距离)</td>
 <td>WMS</td>
-<td>KPI 度量</td>
-<td>字段格式确认</td>
+<td>KPI、训练标注</td>
 <td>@IT部</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>算法回测</strong>: 上线前提取近 3 月出入库+任务记录作基线，灰度验证新策略。</p>
 <hr>
-<h2>6. 成功指标与验证</h2>
-<div class="doc-preview__table-wrap"><table>
-<thead>
-<tr>
-<th>KPI</th>
-<th>基线</th>
-<th>目标</th>
-<th>数据源</th>
-<th>周期</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>行走距离缩短率</td>
-<td>上线前 3 月均值的</td>
-<td>≥25%</td>
-<td>WMS 任务记录</td>
-<td>周报</td>
-</tr>
-<tr>
-<td>拣货工时下降率</td>
-<td>同上</td>
-<td>≥20%</td>
-<td>WMS 工时统计</td>
-<td>周报</td>
-</tr>
-<tr>
-<td>A 类 SKU 低层占比</td>
-<td>当前分布</td>
-<td>≥80% 在 1–3 层</td>
-<td>库位+动销快照</td>
-<td>周报</td>
-</tr>
-<tr>
-<td>推荐采纳率</td>
-<td>—</td>
-<td>≥85%（Top1 采纳）</td>
-<td>PDA 操作日志</td>
-<td>周报</td>
-</tr>
-<tr>
-<td>上架失败率</td>
-<td>—</td>
-<td>≤5%</td>
-<td>WMS 异常记录</td>
-<td>周报</td>
-</tr>
-<tr>
-<td>用户满意度</td>
-<td>—</td>
-<td>≥4.0/5.0</td>
-<td>季度调研</td>
-<td>季</td>
-</tr>
-</tbody>
-</table></div>
-<p><strong>灰度验证</strong>: 1–2 巷道实验组(系统推荐) vs 对照组(人工)，控制人员/SKU/时段，持续 2 周，T 检验 95% 置信度。</p>
-<hr>
-<h2>7. 待确认事项（周一会议）</h2>
+<h2 id="八-待确认事项">八、 待确认事项</h2>
 <div class="doc-preview__table-wrap"><table>
 <thead>
 <tr>
 <th>#</th>
 <th>问题</th>
 <th>责任方</th>
-<th>默认选项</th>
-<th>影响</th>
+<th>默认</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>1</td>
-<td>VC 定义、存储规范、周转口径、是否独立库区</td>
-<td>Super Li</td>
-<td><strong>独立 VC 专区</strong> / 混合整托优先 / 待调研</td>
-<td>库位池</td>
+<td>竞品客户分组清单及隔离半径</td>
+<td>业务方</td>
+<td>同巷道禁邻</td>
 </tr>
 <tr>
 <td>2</td>
-<td>SOP 流程图及库位衔接节点</td>
-<td>Super Li</td>
-<td><strong>加工区缓冲位</strong> / 暂存流转 / 待流程图</td>
-<td>上架后路由</td>
+<td>「客户」口径（货主/店铺/渠道）</td>
+<td>业务方</td>
+<td>货主 ID</td>
 </tr>
 <tr>
 <td>3</td>
-<td>快转判定标准及越库 SOP</td>
+<td>黄金层定义是否与 WMS 2–3 层一致</td>
 <td>仓库经理</td>
-<td><strong>&lt;24h 越库</strong> / &lt;48h / 不占拣货面</td>
-<td>快转策略</td>
+<td><strong>2–3 层</strong></td>
 </tr>
 <tr>
 <td>4</td>
-<td>3D 打托精度（变形系数）</td>
-<td>IT</td>
-<td><strong>固定 0.95</strong> / 接入变形系数</td>
-<td>MVP 范围</td>
+<td>VC 入库单识别字段及是否独立库区</td>
+<td>业务+IT</td>
+<td>二期专项规则；默认与 B2C 混存、整托优先</td>
 </tr>
 <tr>
 <td>5</td>
-<td>再槽位频率与人力预算</td>
-<td>仓库经理</td>
-<td><strong>每周≤5 条/日</strong> / 每月≤10 / 按需</td>
-<td>二期参数</td>
+<td>大促日历数据来源</td>
+<td>运营</td>
+<td>二期接入</td>
 </tr>
 <tr>
 <td>6</td>
-<td>货架层高标准数据录入</td>
+<td>货架主数据录入进度</td>
 <td>IT部</td>
-<td><strong>上线前完成</strong> / 并行</td>
-<td><strong>阻塞项</strong></td>
+<td><strong>上线前完成</strong></td>
 </tr>
 <tr>
 <td>7</td>
-<td>MVP KPI 目标值是否采纳</td>
-<td>全体</td>
-<td>见 §6 默认值</td>
-<td>验收标准</td>
+<td>LightGBM 训练样本标注方案</td>
+<td>IT/算法</td>
+<td>历史任务隐式反馈</td>
 </tr>
 </tbody>
 </table></div>
-<h3>会议议程（60min）</h3>
-<ol>
-<li><strong>需求确认(30min)</strong>: #1–#3、MVP 边界、KPI 目标值</li>
-<li><strong>数据确认(15min)</strong>: 历史数据导出、货架录入进度</li>
-<li><strong>里程碑(15min)</strong>: 上线时间、责任人、协作机制</li>
-</ol>
 <hr>
-<h2>8. 风险与应对</h2>
+<h2 id="九-风险与应对">九、 风险与应对</h2>
 <div class="doc-preview__table-wrap"><table>
 <thead>
 <tr>
 <th>风险</th>
-<th>影响</th>
-<th>概率</th>
 <th>应对</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>上架人员不信任推荐</td>
-<td>高</td>
-<td>高</td>
-<td>理由标签；灰度+培训；允许手动+记原因</td>
+<td>理由标签；灰度试点；允许手动+记原因</td>
 </tr>
 <tr>
-<td>VC/SOP 规则未确认</td>
-<td>高</td>
-<td>中</td>
-<td>一期 B2C+策略插槽；会前拿书面流程</td>
+<td>客户归属数据缺失</td>
+<td>一期降级为同单共现聚集；竞品隔离暂禁</td>
 </tr>
 <tr>
-<td>货架主数据缺失</td>
-<td>高</td>
-<td>中</td>
-<td><strong>上线前必须完成</strong>；录入工具+校验</td>
+<td>模型冷启动效果差</td>
+<td>规则+启发式兜底；观察期 SKU 特殊策略</td>
 </tr>
 <tr>
-<td>再槽位无法落地</td>
-<td>中</td>
-<td>高</td>
+<td>调仓清单无法落地</td>
 <td>任务上限；ROI 排序；人工审批</td>
-</tr>
-<tr>
-<td>数据质量不稳</td>
-<td>中</td>
-<td>高</td>
-<td>观察期+品类均值；质量告警</td>
-</tr>
-<tr>
-<td>WMS 对接不稳</td>
-<td>中</td>
-<td>高</td>
-<td>缓存降级；与 IT 定 SLA</td>
 </tr>
 </tbody>
 </table></div>
 <hr>
-<h2>9. 名词定义</h2>
+<h2 id="十-名词定义">十、 名词定义</h2>
 <div class="doc-preview__table-wrap"><table>
 <thead>
 <tr>
@@ -819,37 +1041,46 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>VC</strong></td>
-<td>待确认：Vendor Central（平台自营采购）或供应商直送</td>
+<td><strong>黄金层</strong></td>
+<td>拣货最优作业层，本方案定义为 WMS <strong>2–3 层</strong></td>
+</tr>
+<tr>
+<td><strong>同客户聚集</strong></td>
+<td>同一客户（货主）SKU 优先存放于同巷道或相邻库位</td>
+</tr>
+<tr>
+<td><strong>前置铺货</strong></td>
+<td>大促前将预测爆款移至出口附近+黄金层</td>
+</tr>
+<tr>
+<td><strong>调仓清单</strong></td>
+<td>系统输出的周期性移库建议任务列表</td>
+</tr>
+<tr>
+<td><strong>VC（平台自营）</strong></td>
+<td>平台向供应商采购并以<strong>自营库存</strong>销售（如亚马逊 VC、天猫超市、京东自营）；入库履约后按平台渠道出库，区别于商家 B2C 寄售</td>
 </tr>
 <tr>
 <td><strong>SOP</strong></td>
-<td>Special Operating Procedure，特殊流程（质检/贴标/组装/退货翻新等）</td>
+<td>业务执行流程</td>
 </tr>
 <tr>
 <td><strong>快转</strong></td>
 <td>入库后极短停留即出库，优先越库</td>
 </tr>
 <tr>
-<td><strong>再槽位</strong></td>
-<td>基于动销变化的库位动态调整（Re-slotting）</td>
-</tr>
-<tr>
-<td><strong>黄金拣货层</strong></td>
-<td>人体工学优层，现场对应 WMS 1–3 层（约 0.6–1.5m）</td>
+<td><strong>B2C</strong></td>
+<td>商家自有库存、平台撮合销售的常规零售模式</td>
 </tr>
 <tr>
 <td><strong>ABC</strong></td>
 <td>按出库频率分级：A 高频、C 低频</td>
 </tr>
-<tr>
-<td><strong>越库</strong></td>
-<td>入库不经存储直接转发出库</td>
-</tr>
 </tbody>
 </table></div>
 <hr>
-<p><strong>文档状态</strong>: ⏳ 待确认 | <strong>下次更新</strong>: 周一会议后 V1.2</p>
+<p><strong>文档状态</strong>: ⏳ 待确认 | V1.0 已明确 VC（平台自营采购）业务定义</p>
+      </div>
     </div>
   </article>
 </body>
